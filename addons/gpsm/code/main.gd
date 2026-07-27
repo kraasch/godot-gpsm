@@ -36,10 +36,19 @@ func new_state() -> State:
 	return s
 
 func new_transition(a: State, b: State) -> Transition:
+	if not states.has(a) or not states.has(b):
+		push_warning('state belongs to another machine')
 	var t: Transition = Transition.new(a, b)
 	t.machine = self
 	transitions.append(t)
 	return t
 
-func initialize() -> void:
+func initialize(_initial_state: State = null) -> void:
+	if _initial_state:
+		initial_state = _initial_state
+	if not initial_state:
+		if len(states) <= 0:
+			push_warning('cannot initialize machine containing no states')
+			return 
+		initial_state = states[0]
 	current_state = initial_state
