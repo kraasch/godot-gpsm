@@ -9,18 +9,44 @@ class State:
 
 class Transition:
 	var machine: GPSM
-	var state_a: State
-	var state_b: State
-	func _init(_state_a: State, _state_b: State) -> void:
-		state_a = _state_a
-		state_b = _state_b
+	var state_from: State
+	var state_to: State
+	func _init(_state_from: State, _state_to: State) -> void:
+		state_from = _state_from
+		state_to = _state_to
 	func trigger() -> void:
-		if machine.current_state == state_a:
-			state_b.on_before_exited.emit()
-			state_a.on_exited.emit()
-			machine.current_state = state_b
-			state_b.on_entered.emit()
-			state_a.on_after_entered.emit()
+		if machine.current_state == state_from:
+			state_to.on_before_exited.emit()
+			state_from.on_exited.emit()
+			machine.current_state = state_to
+			state_to.on_entered.emit()
+			state_from.on_after_entered.emit()
+		else:
+			_push_message()
+	func _push_message() -> void:
+		var message: String = _create_message()
+		match machine.throw_type:
+			GPSM.THROW_TYPE.WARNING:
+				push_warning(message)
+			GPSM.THROW_TYPE.ERROR:
+				push_error(message)
+	func _create_message() -> String:
+		var this_transition_num: int = machine.transitions.find(self)
+		var this_transition_from_state_num: int = machine.states.find(state_from)
+		var this_transition_to_state_num: int = machine.states.find(state_to)
+		var current_state_num: int = machine.states.find(machine.current_state)
+		var message: String = 'state was S#' + \
+			str(current_state_num) + \
+			', but transition T#' + \
+			str(this_transition_num) + \
+			' (from S#' + \
+			str(this_transition_from_state_num) + \
+			' to S#' + \
+			str(this_transition_to_state_num) + \
+			') triggered.'
+		return message
+
+enum THROW_TYPE {SILENT, WARNING, ERROR}
 
 var transitions: Array[Transition] = []:
 	get:
@@ -36,6 +62,9 @@ var initial_state: State:
 		return initial_state
 	set(value):
 		initial_state = value
+var throw_type: THROW_TYPE:
+	set(value):
+		throw_type = value
 
 func new_state() -> State:
 	var s: State = State.new()
