@@ -1,0 +1,8 @@
+
+# This project.
+reports/
+
+# Godot 4+ specific ignores
+.godot/
+/android/
+
