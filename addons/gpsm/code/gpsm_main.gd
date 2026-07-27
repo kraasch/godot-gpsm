@@ -8,6 +8,7 @@ class State:
 	signal on_after_entered
 
 class Transition:
+	signal on_failure(message: String, transition: Transition, current_state: State)
 	var throw_type: THROW_TYPE:
 		set(value):
 			throw_type = value
@@ -28,6 +29,7 @@ class Transition:
 			_push_message()
 	func _push_message() -> void:
 		var message: String = _create_message()
+		on_failure.emit(message, self, machine.current_state)
 		match machine.throw_type:
 			GPSM.THROW_TYPE.WARNING:
 				push_warning(message)
@@ -77,6 +79,7 @@ var initial_state: State:
 var throw_type: THROW_TYPE:
 	set(value):
 		throw_type = value
+var trigger_on_init: bool = true
 
 func new_state() -> State:
 	var s: State = State.new()
@@ -100,3 +103,5 @@ func initialize(_initial_state: State = null) -> void:
 			return 
 		initial_state = states[0]
 	current_state = initial_state
+	if trigger_on_init:
+		current_state.on_entered.emit()

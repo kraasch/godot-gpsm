@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://cyg0yqlf5o7v1"]
+
+[ext_resource type="Script" uid="uid://brxprawl8hw4d" path="res://addons/gpsm/examples/arrow.gd" id="1_2v08k"]
+[ext_resource type="Texture2D" uid="uid://ccgv1rf1aa5ve" path="res://addons/gpsm/assets/icon.svg" id="1_xbdch"]
+
+[node name="Arrow" type="Control" unique_id=668698887]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_2v08k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=139037023]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -2.0
+offset_top = -74.0
+offset_right = 238.0
+offset_bottom = 68.0
+color = Color(0.2534952, 0.35556862, 0.67594427, 1)
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1660083653]
+position = Vector2(18, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon9" type="Sprite2D" parent="." unique_id=1942924965]
+position = Vector2(42, 31)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon10" type="Sprite2D" parent="." unique_id=1474063251]
+position = Vector2(66, 55)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon8" type="Sprite2D" parent="." unique_id=1023984600]
+position = Vector2(42, -33)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon11" type="Sprite2D" parent="." unique_id=568617921]
+position = Vector2(66, -57)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon2" type="Sprite2D" parent="." unique_id=1496714026]
+position = Vector2(50, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon3" type="Sprite2D" parent="." unique_id=19416282]
+position = Vector2(82, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon4" type="Sprite2D" parent="." unique_id=751424514]
+position = Vector2(114, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon5" type="Sprite2D" parent="." unique_id=234254655]
+position = Vector2(146, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon6" type="Sprite2D" parent="." unique_id=347082032]
+position = Vector2(178.00002, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Icon7" type="Sprite2D" parent="." unique_id=903404816]
+position = Vector2(210, -1)
+scale = Vector2(0.265625, 0.2734375)
+texture = ExtResource("1_xbdch")
+
+[node name="Button" type="Button" parent="." unique_id=1441290992]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -77.0
+offset_right = 237.0
+offset_bottom = 70.0

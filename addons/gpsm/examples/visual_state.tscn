@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cjpy4hs3dob3h"]
+
+[ext_resource type="Script" uid="uid://j8umglqjkmb3" path="res://addons/gpsm/examples/visual_state.gd" id="1_8fegp"]
+[ext_resource type="Texture2D" uid="uid://ccgv1rf1aa5ve" path="res://addons/gpsm/assets/icon.svg" id="1_jrvs8"]
+
+[node name="VisualState" type="Control" unique_id=620006198]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+script = ExtResource("1_8fegp")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1313823680]
+unique_name_in_owner = true
+position = Vector2(64, 64)
+texture = ExtResource("1_jrvs8")

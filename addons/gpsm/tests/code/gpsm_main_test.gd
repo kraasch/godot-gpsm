@@ -39,6 +39,45 @@ func _setup_testing_state_machine() -> void:
 # TestSuite generated from
 const __source: String = 'res://addons/gpsm/code/main.gd'
 
+func test_state_machine__enable_transition_warnings__custom_on_failure_hook() -> void:
+	var msg0: String = 'state was S#1, but transition T#3 (from S#3 to S#2) triggered.'
+	var msg1: String = 'state was S#0, but transition T#3 (from S#3 to S#2) triggered.'
+	var custom_messages: Array[String] = []
+	var states: Array[GPSM.State] = []
+	var transitions: Array[GPSM.Transition] = []
+	_setup_testing_state_machine()
+	_SM.initialize()
+	_SM.throw_type = GPSM.THROW_TYPE.SILENT
+	_T3.throw_type = GPSM.THROW_TYPE.WARNING
+	var collect_failures: Callable = func(message: String, transition: GPSM.Transition, current_state: GPSM.State):
+		custom_messages.append(message)
+		transitions.append(transition)
+		states.append(current_state)
+	_T3.on_failure.connect(collect_failures)
+	assert_that(_SM.current_state).is_equal(_A)
+	await assert_error(func (): _T0.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_push_warning('state was S#1, but transition T#3 (from S#3 to S#2) triggered.')
+	assert_that(_SM.current_state).is_equal(_B)
+	_T3.throw_type = GPSM.THROW_TYPE.ERROR
+	await assert_error(func (): _T1.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_push_error('state was S#0, but transition T#3 (from S#3 to S#2) triggered.')
+	assert_that(_SM.current_state).is_equal(_A)
+	await assert_error(func (): _T4.trigger()).is_success()
+	await assert_error(func (): _T1.trigger()).is_success()
+	assert_that(_SM.current_state).is_equal(_C)
+	await assert_error(func (): _T2.trigger()).is_success()
+	await assert_error(func (): _T1.trigger()).is_success()
+	assert_that(_SM.current_state).is_equal(_D)
+	_T3.throw_type = GPSM.THROW_TYPE.SILENT
+	_T3.on_failure.disconnect(collect_failures)
+	await assert_error(func (): _T3.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_success()
+	assert_that(_SM.current_state).is_equal(_C)
+	assert_that(_SM.current_state).is_equal(_C)
+	assert_array(custom_messages).is_equal([msg0, msg1])
+	assert_array(transitions).is_equal([_T3, _T3])
+	assert_array(states).is_equal([_B, _A])
+
 func test_state_machine__enable_transition_warnings__enable_individual_triggers() -> void:
 	_setup_testing_state_machine()
 	_SM.initialize()
@@ -125,6 +164,29 @@ func test_state_machine__enable_transition_warnings__no_warnings() -> void:
 	await assert_error(func (): _T3.trigger()).is_success()
 	await assert_error(func (): _T0.trigger()).is_success()
 	assert_that(_SM.current_state).is_equal(_C)
+
+func test_state_machine__initialize_triggers_state_change_01() -> void:
+	var result: Array[String] = []
+	var sm: GPSM = GPSM.new()
+	var A: GPSM.State = sm.new_state()
+	A.on_entered.connect(result.append.bind('a'))
+	A.on_exited.connect(result.append.bind('b'))
+	A.on_after_entered.connect(result.append.bind('b'))
+	A.on_before_exited.connect(result.append.bind('b'))
+	sm.trigger_on_init = false
+	sm.initialize()
+	assert_array(result).is_empty()
+
+func test_state_machine__initialize_triggers_state_change_00() -> void:
+	var result: Array[String] = []
+	var sm: GPSM = GPSM.new()
+	var A: GPSM.State = sm.new_state()
+	A.on_entered.connect(result.append.bind('a'))
+	A.on_exited.connect(result.append.bind('b'))
+	A.on_after_entered.connect(result.append.bind('b'))
+	A.on_before_exited.connect(result.append.bind('b'))
+	sm.initialize()
+	assert_array(result).is_equal(['a',])
 
 func test_state_machine__provide_signals_for_state_change() -> void:
 	var result: Array[String] = []

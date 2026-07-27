@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://bsbek35rdkfov"]
+
+[ext_resource type="Script" uid="uid://bsf1bla4rdty7" path="res://addons/gpsm/examples/demo_for_gpsm.gd" id="1_sdx2v"]
+[ext_resource type="PackedScene" uid="uid://cjpy4hs3dob3h" path="res://addons/gpsm/examples/visual_state.tscn" id="2_a1jj1"]
+[ext_resource type="PackedScene" uid="uid://cyg0yqlf5o7v1" path="res://addons/gpsm/examples/arrow.tscn" id="3_ek3as"]
+
+[node name="DemoForGPSM" type="Control" unique_id=460212614]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sdx2v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2089889574]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=2031006065]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VisualState1" parent="." unique_id=620006198 instance=ExtResource("2_a1jj1")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 191.0
+offset_top = 58.0
+offset_right = 319.0
+offset_bottom = 186.0
+
+[node name="VisualState2" parent="." unique_id=1603556991 instance=ExtResource("2_a1jj1")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 778.0
+offset_top = 58.0
+offset_right = 906.0
+offset_bottom = 186.0
+
+[node name="VisualState3" parent="." unique_id=1360166121 instance=ExtResource("2_a1jj1")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 177.0
+offset_top = 445.0
+offset_right = 305.0
+offset_bottom = 573.0
+
+[node name="VisualState4" parent="." unique_id=1926928833 instance=ExtResource("2_a1jj1")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 763.0
+offset_top = 466.0
+offset_right = 891.0
+offset_bottom = 594.0
+
+[node name="Arrow0" parent="." unique_id=668698887 instance=ExtResource("3_ek3as")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 661.0
+offset_top = 113.0
+offset_right = 661.0
+offset_bottom = 113.0
+rotation = -3.135545
+
+[node name="Arrow1" parent="." unique_id=1504498550 instance=ExtResource("3_ek3as")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 436.99997
+offset_top = 246.0
+offset_right = 436.99997
+offset_bottom = 246.0
+rotation = -0.028918266
+
+[node name="Arrow2" parent="." unique_id=1309421501 instance=ExtResource("3_ek3as")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 637.0
+offset_top = 462.0
+offset_right = 637.0
+offset_bottom = 462.0
+rotation = -3.135545
+
+[node name="Arrow3" parent="." unique_id=1369480087 instance=ExtResource("3_ek3as")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 405.99997
+offset_top = 571.0
+offset_right = 405.99997
+offset_bottom = 571.0
+rotation = -0.028918266
+
+[node name="Arrow4" parent="." unique_id=816730342 instance=ExtResource("3_ek3as")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 208.00002
+offset_top = 418.00003
+offset_right = 208.00002
+offset_bottom = 418.00003
+rotation = -1.6056093
+
+[node name="Arrow5" parent="." unique_id=380820889 instance=ExtResource("3_ek3as")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 921.0
+offset_top = 416.00003
+offset_right = 921.0
+offset_bottom = 416.00003
+rotation = -1.6056093
