@@ -5,23 +5,41 @@ class State:
 	pass
 
 class Transition:
+	var machine: GPSM
 	var state_a: State
 	var state_b: State
 	func _init(_state_a: State, _state_b: State) -> void:
 		state_a = _state_a
 		state_b = _state_b
+	func trigger() -> void:
+		if machine.current_state == state_a:
+			machine.current_state = state_b
 
-var transitions: Array[Transition] = []
-var states: Array[State] = []
+var transitions: Array[Transition] = []:
+	get:
+		return transitions
+var states: Array[State] = []:
+	get:
+		return states
+var current_state: State:
+	get:
+		return current_state
+var initial_state: State:
+	get:
+		return initial_state
+	set(value):
+		initial_state = value
 
-func get_transitions() -> Array[Transition]:
-	return transitions
+func new_state() -> State:
+	var s: State = State.new()
+	states.append(s)
+	return s
 
-func get_states() -> Array[State]:
-	return states
+func new_transition(a: State, b: State) -> Transition:
+	var t: Transition = Transition.new(a, b)
+	t.machine = self
+	transitions.append(t)
+	return t
 
-func add_transition(transition: Transition) -> void:
-	transitions.append(transition)
-
-func add_state(state: State) -> void:
-	states.append(state)
+func initialize() -> void:
+	current_state = initial_state
