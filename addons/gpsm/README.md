@@ -9,7 +9,7 @@
 ## demo
 
 <p align="center">
-  <img src="./addons/gpsm/info/picture.png" />
+  <img src="./addons/gpsm/info/picture_dark.png" />
 </p>
 
 ## code example
