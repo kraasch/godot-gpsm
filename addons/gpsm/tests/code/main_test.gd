@@ -31,7 +31,6 @@ func test_state_machine__trigger_transition() -> void:
 	T0.trigger()
 	assert_that(sm.current_state).is_equal(B)
 
-
 func test_state_machine__set_initial_state_03() -> void:
 	var sm: GPSM = GPSM.new()
 	var A: GPSM.State = sm.new_state()
