@@ -39,6 +39,30 @@ func _setup_testing_state_machine() -> void:
 # TestSuite generated from
 const __source: String = 'res://addons/gpsm/code/main.gd'
 
+func test_state_machine__enable_transition_warnings__enable_individual_triggers() -> void:
+	_setup_testing_state_machine()
+	_SM.initialize()
+	_SM.throw_type = GPSM.THROW_TYPE.SILENT
+	_T3.throw_type = GPSM.THROW_TYPE.WARNING
+	assert_that(_SM.current_state).is_equal(_A)
+	await assert_error(func (): _T0.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_push_warning('state was S#1, but transition T#3 (from S#3 to S#2) triggered.')
+	assert_that(_SM.current_state).is_equal(_B)
+	_T3.throw_type = GPSM.THROW_TYPE.ERROR
+	await assert_error(func (): _T1.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_push_error('state was S#0, but transition T#3 (from S#3 to S#2) triggered.')
+	assert_that(_SM.current_state).is_equal(_A)
+	await assert_error(func (): _T4.trigger()).is_success()
+	await assert_error(func (): _T1.trigger()).is_success()
+	assert_that(_SM.current_state).is_equal(_C)
+	await assert_error(func (): _T2.trigger()).is_success()
+	await assert_error(func (): _T1.trigger()).is_success()
+	assert_that(_SM.current_state).is_equal(_D)
+	_T3.throw_type = GPSM.THROW_TYPE.WARNING
+	await assert_error(func (): _T3.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_push_warning('state was S#2, but transition T#3 (from S#3 to S#2) triggered.')
+	assert_that(_SM.current_state).is_equal(_C)
+
 func test_state_machine__enable_transition_warnings__with_errors() -> void:
 	_setup_testing_state_machine()
 	_SM.initialize()

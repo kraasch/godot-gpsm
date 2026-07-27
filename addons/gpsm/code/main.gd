@@ -8,6 +8,9 @@ class State:
 	signal on_after_entered
 
 class Transition:
+	var throw_type: THROW_TYPE:
+		set(value):
+			throw_type = value
 	var machine: GPSM
 	var state_from: State
 	var state_to: State
@@ -28,8 +31,17 @@ class Transition:
 		match machine.throw_type:
 			GPSM.THROW_TYPE.WARNING:
 				push_warning(message)
+				return
 			GPSM.THROW_TYPE.ERROR:
 				push_error(message)
+				return
+		match throw_type:
+			GPSM.THROW_TYPE.WARNING:
+				push_warning(message)
+				return
+			GPSM.THROW_TYPE.ERROR:
+				push_error(message)
+				return
 	func _create_message() -> String:
 		var this_transition_num: int = machine.transitions.find(self)
 		var this_transition_from_state_num: int = machine.states.find(state_from)
