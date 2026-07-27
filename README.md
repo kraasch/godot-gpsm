@@ -9,7 +9,7 @@
 ## demo
 
 <p align="center">
-  <img src="./addons/glitch_intro/info/picture.png" />
+  <img src="./addons/gpsm/info/picture.png" />
 </p>
 
 ## code example
