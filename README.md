@@ -4,6 +4,7 @@
  A lean general purpose state machine plugin for Godot.
 
   - AssetLib: [Godot GPSM (#23828)](https://godotengine.org/asset-library/asset/23828)
+    - proposal at [Godot GPSM (#23828)](https://godotengine.org/asset-library/asset/edit/23828)
   - Github: [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm)
 
 ## demo
@@ -97,7 +98,12 @@ individual transitions can also be troggled.
 	_T3.on_failure.connect(collect_failures)
 ```
 
+## license
+
+see [license file](.addons/gpsm/LICENSE).
+
+
 ## credits
 
-see [web respository contributions](https://github.com/kraasch/godot-gpsm).
+see web repository's [contributions](https://github.com/kraasch/godot-gpsm).
 
