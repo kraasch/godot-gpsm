@@ -4,7 +4,7 @@
  A lean general purpose state machine plugin for Godot.
 
   - TODO: AssetLib: [Godot GPSM (#4667)](https://godotengine.org/asset-library/asset/..........SOMENUMBERHERE......)
-  - TODO: Github: [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm)
+  - Github: [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm)
 
 ## demo
 
@@ -29,5 +29,5 @@ For creating and connecting a new state machine do as shown below.
 
 ## credits
 
-  - see github contributions.
+see [web respository contributions](https://github.com/kraasch/godot-gpsm).
 
