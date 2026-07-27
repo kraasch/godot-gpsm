@@ -14,9 +14,19 @@ config/name="general-purpose-state-machine"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/mode=3
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/gpsm/plugin.cfg")
+
+[gdunit4]
+
+settings/test/test_lookup_folder="tests"
+settings/test/test_discovery=true
+ui/toolbar/run_overall=true
 
 [physics]
 

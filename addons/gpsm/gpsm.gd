@@ -1,22 +1,30 @@
 @tool
 extends EditorPlugin
 
+## The plugin name (or node name if it ever becomes a node).
+#var plugin_type : String = "GlitchIntroNode" # NOTE: comment in, if needed.
 
-func _enable_plugin() -> void:
+## The location of the plugin's main script.
+var plugin_script : Resource = preload("res://addons/gpsm/code/main.gd")
+
+## The location of the plugin's icon.
+var plugin_icon : Resource = preload("res://addons/gpsm/assets/gpsm.png")
+
+## The base type of the plugin.
+#var plugin_base : String = "Control" # NOTE: comment in, if needed.
+
+#func _enable_plugin() -> void: # NOTE: comment in, if needed.
 	# Add autoloads here.
-	pass
+	#pass
 
-
-func _disable_plugin() -> void:
+#func _disable_plugin() -> void: # NOTE: comment in, if needed.
 	# Remove autoloads here.
-	pass
+	#pass
 
+## Called after add_child(). 
+#func _enter_tree() -> void: # NOTE: comment in, if needed.
+	#add_custom_type(plugin_type, plugin_base, plugin_script, plugin_icon)
 
-func _enter_tree() -> void:
-	# Initialization of the plugin goes here.
-	pass
-
-
-func _exit_tree() -> void:
-	# Clean-up of the plugin goes here.
-	pass
+## Called when node is removed from tree.
+#func _exit_tree() -> void: # NOTE: comment in, if needed.
+	#remove_custom_type(plugin_type)
