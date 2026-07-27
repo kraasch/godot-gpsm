@@ -7,6 +7,20 @@ extends GdUnitTestSuite
 # TestSuite generated from
 const __source: String = 'res://addons/gpsm/code/main.gd'
 
+func test_state_machine__provide_signals_for_state_change() -> void:
+	var result: Array[String] = []
+	var sm: GPSM = GPSM.new()
+	var A: GPSM.State = sm.new_state()
+	var B: GPSM.State = sm.new_state()
+	var T: GPSM.Transition = sm.new_transition(A, B)
+	A.on_exited.connect(result.append.bind('b'))
+	A.on_after_entered.connect(result.append.bind('d'))
+	B.on_before_exited.connect(result.append.bind('a'))
+	B.on_entered.connect(result.append.bind('c'))
+	sm.initialize()
+	T.trigger()
+	assert_array(result).is_equal(['a','b','c','d'])
+
 func test_state_machine__cannot_mix_states_of_different_machines() -> void:
 	var sm: GPSM = GPSM.new()
 	var intruder_sm: GPSM = GPSM.new()

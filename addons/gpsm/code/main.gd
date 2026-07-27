@@ -2,7 +2,10 @@ extends RefCounted
 class_name GPSM
 
 class State:
-	pass
+	signal on_before_exited
+	signal on_exited
+	signal on_entered
+	signal on_after_entered
 
 class Transition:
 	var machine: GPSM
@@ -13,7 +16,11 @@ class Transition:
 		state_b = _state_b
 	func trigger() -> void:
 		if machine.current_state == state_a:
+			state_b.on_before_exited.emit()
+			state_a.on_exited.emit()
 			machine.current_state = state_b
+			state_b.on_entered.emit()
+			state_a.on_after_entered.emit()
 
 var transitions: Array[Transition] = []:
 	get:
