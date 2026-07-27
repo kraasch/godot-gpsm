@@ -5,10 +5,10 @@ extends EditorPlugin
 #var plugin_type : String = "GlitchIntroNode" # NOTE: comment in, if needed.
 
 ## The location of the plugin's main script.
-var plugin_script : Resource = preload("res://addons/gpsm/code/main.gd")
+#var plugin_script : Resource = preload("res://addons/gpsm/code/main.gd") # NOTE: comment in, if needed.
 
 ## The location of the plugin's icon.
-var plugin_icon : Resource = preload("res://addons/gpsm/assets/gpsm.png")
+#var plugin_icon : Resource = preload("res://addons/gpsm/assets/gpsm.png") # NOTE: comment in, if needed.
 
 ## The base type of the plugin.
 #var plugin_base : String = "Control" # NOTE: comment in, if needed.
