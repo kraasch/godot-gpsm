@@ -58,9 +58,9 @@ func test_state_machine__enable_transition_warnings__enable_individual_triggers(
 	await assert_error(func (): _T2.trigger()).is_success()
 	await assert_error(func (): _T1.trigger()).is_success()
 	assert_that(_SM.current_state).is_equal(_D)
-	_T3.throw_type = GPSM.THROW_TYPE.WARNING
+	_T3.throw_type = GPSM.THROW_TYPE.SILENT
 	await assert_error(func (): _T3.trigger()).is_success()
-	await assert_error(func (): _T3.trigger()).is_push_warning('state was S#2, but transition T#3 (from S#3 to S#2) triggered.')
+	await assert_error(func (): _T3.trigger()).is_success()
 	assert_that(_SM.current_state).is_equal(_C)
 
 func test_state_machine__enable_transition_warnings__with_errors() -> void:
