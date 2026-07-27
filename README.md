@@ -60,7 +60,8 @@ func _setup_testing_state_machine() -> void:
 	_T5 = _SM.new_transition(_B, _D)
 ```
 
-connect state transitions or log failure like so:
+connect state transitions or log failure as shown below.
+
 
 ```gdscript
 	var collect_failures: Callable = func(message: String, transition: GPSM.Transition, current_state: GPSM.State):
@@ -79,9 +80,13 @@ connect state transitions or log failure like so:
 		transition.on_failure.connect(arrow.blink)
 		transition.on_failure.connect(func (msg, t, s): print('failed transition: ' + str(msg)))
 		transition.on_failure.connect(collect_failures)
+	_SM.initialize()
 ```
 
+the intial state transition when calling the statem machine's `initialize()` function can be toggled on or off.
+
 the machine can throw warnings, when transitions are triggered during the wrong state.
+
 individual transitions can also be troggled.
 
 ```gdscript
