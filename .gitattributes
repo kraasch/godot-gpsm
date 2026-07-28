@@ -1,0 +1,15 @@
+
+# Normalize line endings for all files that Git considers text files.
+* text=auto eol=lf
+
+# Exclude everything by default.
+/**        export-ignore
+
+# Include the addons folder.
+/addons    !export-ignore
+/addons/** !export-ignore
+
+# But exclude gdUnit again.
+/addons/gdUnit/** export-ignore
+/addons/gdUnit export-ignore
+
