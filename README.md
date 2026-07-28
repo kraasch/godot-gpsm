@@ -6,6 +6,7 @@
   - AssetLib: [Godot GPSM (#23828)](https://godotengine.org/asset-library/asset/23828)
     - proposal at [Godot GPSM (#23828)](https://godotengine.org/asset-library/asset/edit/23828)
   - Github: [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm)
+    - asset download url on [github.com/kraasch/godot-gpsm]( https://github.com/kraasch/godot-gpsm/archive/f142dc4597c40defa1680f4d280724d86576acb1.zip)
 
 ## demo
 
