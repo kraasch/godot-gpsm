@@ -39,6 +39,27 @@ func _setup_testing_state_machine() -> void:
 # TestSuite generated from
 const __source: String = 'res://addons/gpsm/code/main.gd'
 
+func test_state_machine__allow_transitions_to_same_state() -> void:
+	var result: Array[String] = []
+	var sm: GPSM = GPSM.new()
+	var A: GPSM.State = sm.new_state()
+	A.on_before_exited.connect(result.append.bind('a'))
+	A.on_exited.connect(result.append.bind('b'))
+	A.on_entered.connect(result.append.bind('c'))
+	A.on_after_entered.connect(result.append.bind('d'))
+	var T0: GPSM.Transition = sm.new_transition(A, A)
+	var T1: GPSM.Transition = sm.new_transition(A, A)
+	sm.initialize()
+	T0.trigger()
+	T1.trigger()
+	assert_array(result).is_equal(
+		[
+			'c', # on initialization there is no states to exit and no after_entered, because all three depend on the exit of a state.
+			'a','b','c','d', 
+			'a','b','c','d'
+		]
+	)
+
 func test_state_machine__enable_transition_warnings__custom_on_failure_hook() -> void:
 	var msg0: String = 'state was S#1, but transition T#3 (from S#3 to S#2) triggered.'
 	var msg1: String = 'state was S#0, but transition T#3 (from S#3 to S#2) triggered.'
