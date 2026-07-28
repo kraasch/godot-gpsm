@@ -10,6 +10,6 @@
 /addons/** !export-ignore
 
 # But exclude gdUnit again.
-/addons/gdUnit/** export-ignore
-/addons/gdUnit export-ignore
+/addons/gdUnit4/** export-ignore
+/addons/gdUnit4 export-ignore
 
