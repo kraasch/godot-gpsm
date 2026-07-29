@@ -80,7 +80,7 @@ func _setup_testing_state_machine() -> void:
 	_T5 = _SM.new_transition(_B, _D)
 ```
 
-connect state transitions or log failure as shown below.
+Connect state transitions or log failure as shown below.
 
 
 ```gdscript
@@ -103,11 +103,11 @@ connect state transitions or log failure as shown below.
 	_SM.initialize()
 ```
 
-the intial state transition when calling the statem machine's `initialize()` function can be toggled on or off.
+The initial state transition when calling the state machine's `initialize()` function can be toggled on or off.
 
-the machine can throw warnings, when transitions are triggered during the wrong state.
+The machine can throw warnings, when transitions are triggered during the wrong state.
 
-individual transitions can also be troggled.
+Individual transitions can also be toggled.
 
 ```gdscript
 # will create push_warning() or push_error()
@@ -123,12 +123,31 @@ individual transitions can also be troggled.
 	_T3.on_failure.connect(collect_failures)
 ```
 
+Optionally machines, states and transitions can be given text identifiers.
+
+
+```gdscript
+  GPSM.new_machine('MY_MACHINE')
+	var sm: GPSM = GPSM.get_machine('MY_MACHINE')
+	var A: GPSM.State = sm.new_state()
+	var B: GPSM.State = sm.new_state('NAMED STATE')
+	sm.new_state()
+	sm.new_state()
+	var C: GPSM.State = sm.new_state()
+	var T0: GPSM.Transition = sm.new_transition(A, C)
+	var T1: GPSM.Transition = sm.new_transition(B, A, 'NAMED TRANSITION')
+	var T2: GPSM.Transition = sm.new_transition(sm.state_dict['NAMED STATE'], C)
+  var transition: GPSM.Transition = sm.transition_dict['NAMED TRANSITION']
+  if transition:
+    transition.trigger()
+```
+
 ## license
 
-see [license file](.addons/gpsm/LICENSE).
+See [license file](.addons/gpsm/LICENSE).
 
 
 ## credits
 
-see web repository's [contributions](https://github.com/kraasch/godot-gpsm).
+See web repository's [contributions](https://github.com/kraasch/godot-gpsm).
 
