@@ -8,7 +8,8 @@ A general purpose state machine which can express states and transitions between
   - Is not based on Nodes, but on a RefCounted script.
   - Provides 4 signals for each state and 2 signals for each transition.
   - Entirely based on Godot's signals.
-  - Well documented.
+  - Well documented (50% of code = amount of comments).
+  - Good test coverage (200% of code = amount of tests).
   - Comes with gdunit4 tests.
   - Comes with example project.
   - Tests can be deleted (addons/gpsm/tests).
