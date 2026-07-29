@@ -47,7 +47,7 @@ const __source: String = 'res://addons/gpsm/code/main.gd'
 #func test_state_machine__print_methods() -> void:
 	#pass
 
-func test_state_machine__allow_alternate_names() -> void:
+func test_state_machine__allow_alternative_names() -> void:
 	# create machines.
 	var result: Array[String] = []
 	var unused_reference: GPSM = GPSM.new_machine('machine 1')
