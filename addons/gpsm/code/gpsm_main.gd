@@ -3,6 +3,8 @@ class_name GPSM
 
 class State:
 	var name: String
+	func _to_string() -> String:
+		return 'state(name: %s)' % [name]
 	func _init(_name: String) -> void:
 		name = _name
 	signal on_before_exited
@@ -19,6 +21,8 @@ class Transition:
 	var state_from: State
 	var state_to: State
 	var name: String
+	func _to_string() -> String:
+		return 'transition(name: %s, from: %s, to: %s)' % [name, state_from.name, state_to.name]
 	func _init(_state_from: State, _state_to: State, _name: String) -> void:
 		name = _name
 		state_from = _state_from
@@ -94,6 +98,10 @@ var transitions_dict: Dictionary
 static var machines_dict: Dictionary[String, GPSM] = {}
 static var machines: Array[GPSM] = []
 
+static func reset() -> void:
+	machines_dict = {}
+	machines = []
+
 static func new_machine(_name: String) -> GPSM:
 	if machines_dict.has(_name):
 		push_warning('machine name already exists')
@@ -108,6 +116,9 @@ static func get_machine(_name: String) -> GPSM:
 	if not _name or not machines_dict.has(_name):
 		return null
 	return machines_dict[_name]
+
+func _to_string() -> String:
+	return 'machine(name: %s, states: %d, transitions: %d)' % [name, len(states), len(transitions)]
 
 func _get_unique_state_name() -> String:
 	var name: String

@@ -44,10 +44,33 @@ const __source: String = 'res://addons/gpsm/code/main.gd'
 #func test_state_machine__provide_signal_during_transition() -> void:
 	#pass
 
-#func test_state_machine__print_methods() -> void:
-	#pass
+func test_state_machine__print_methods() -> void:
+	GPSM.reset()
+	const PRUNTY: String = 'THEY-CALL-ME-PRUNTY'
+	const BEN: String = 'THEY-CALL-ME-BEN'
+	var sm: GPSM = GPSM.new_machine('MY_MACHINE')
+	var A: GPSM.State = sm.new_state()
+	var B: GPSM.State = sm.new_state(PRUNTY)
+	sm.new_state()
+	sm.new_state()
+	var C: GPSM.State = sm.new_state()
+	var T0: GPSM.Transition = sm.new_transition(A, C)
+	var T1: GPSM.Transition = sm.new_transition(B, A, BEN)
+	var T2: GPSM.Transition = sm.new_transition(B, C)
+	var machine: GPSM = GPSM.get_machine('MY_MACHINE')
+	assert_that(str(machine)).is_equal('machine(name: MY_MACHINE, states: 5, transitions: 3)')
+	assert_that(str(machine.states[0])).is_equal('state(name: unnamed#1)')
+	assert_that(str(machine.states[1])).is_equal('state(name: THEY-CALL-ME-PRUNTY)')
+	assert_that(str(machine.states[4])).is_equal('state(name: unnamed#4)')
+	assert_that(str(machine.transitions[0])).is_equal('transition(name: unnamed#1, from: unnamed#1, to: unnamed#4)')
+	assert_that(str(machine.transitions[1])).is_equal('transition(name: THEY-CALL-ME-BEN, from: THEY-CALL-ME-PRUNTY, to: unnamed#1)')
+	assert_that(str(machine.transitions[2])).is_equal('transition(name: unnamed#2, from: THEY-CALL-ME-PRUNTY, to: unnamed#4)')
+	machine.initialize()
+	assert_that(str(machine.current_state)).is_equal('state(name: unnamed#1)')
+	GPSM.reset()
 
 func test_state_machine__allow_alternative_names() -> void:
+	GPSM.reset()
 	# create machines.
 	var result: Array[String] = []
 	var unused_reference: GPSM = GPSM.new_machine('machine 1')
@@ -102,6 +125,7 @@ func test_state_machine__allow_alternative_names() -> void:
 			'A','B','C','D', # state B tot state B.
 		]
 	)
+	GPSM.reset()
 
 func test_state_machine__allow_transitions_to_same_state() -> void:
 	var result: Array[String] = []
