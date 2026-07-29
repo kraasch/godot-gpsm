@@ -14,6 +14,7 @@ class State:
 
 class Transition:
 	signal on_failure(message: String, transition: Transition, current_state: State)
+	signal on_success(transition: Transition)
 	var throw_type: THROW_TYPE:
 		set(value):
 			throw_type = value
@@ -29,14 +30,17 @@ class Transition:
 		state_to = _state_to
 	func trigger() -> void:
 		if machine.current_state == state_from:
+			_handle_success()
+		else:
+			_handle_failure()
+	func _handle_success() -> void:
 			state_to.on_before_exited.emit()
 			state_from.on_exited.emit()
+			on_success.emit(self)
 			machine.current_state = state_to
 			state_to.on_entered.emit()
 			state_from.on_after_entered.emit()
-		else:
-			_push_message()
-	func _push_message() -> void:
+	func _handle_failure() -> void:
 		var message: String = _create_message()
 		on_failure.emit(message, self, machine.current_state)
 		match machine.throw_type:

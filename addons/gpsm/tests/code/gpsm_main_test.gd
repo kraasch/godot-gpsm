@@ -39,10 +39,30 @@ func _setup_testing_state_machine() -> void:
 # TestSuite generated from
 const __source: String = 'res://addons/gpsm/code/main.gd'
 
-## TODO: add comments to everything.
-
-#func test_state_machine__provide_signal_during_transition() -> void:
-	#pass
+func test_state_machine__provide_signal_for_successful_transition() -> void:
+	_setup_testing_state_machine()
+	var results: Array[String] = []
+	var collect_transitions: Callable = func(transition: GPSM.Transition, letter: String):
+		results.append(letter)
+	_T0.on_success.connect(collect_transitions.bind('a'))
+	_T1.on_success.connect(collect_transitions.bind('b'))
+	_T2.on_success.connect(collect_transitions.bind('c'))
+	_T3.on_success.connect(collect_transitions.bind('d'))
+	_T4.on_success.connect(collect_transitions.bind('e'))
+	_T5.on_success.connect(collect_transitions.bind('f'))
+	_SM.initialize()
+	assert_that(_SM.current_state).is_equal(_A)
+	_T0.trigger()
+	assert_that(_SM.current_state).is_equal(_B)
+	_T1.trigger()
+	assert_that(_SM.current_state).is_equal(_A)
+	_T4.trigger()
+	assert_that(_SM.current_state).is_equal(_C)
+	_T2.trigger()
+	assert_that(_SM.current_state).is_equal(_D)
+	_T3.trigger()
+	assert_that(_SM.current_state).is_equal(_C)
+	assert_array(results).is_equal(['a','b','e','c','d'])
 
 func test_state_machine__print_methods() -> void:
 	GPSM.reset()
