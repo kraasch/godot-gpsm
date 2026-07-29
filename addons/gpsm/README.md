@@ -1,13 +1,29 @@
 
 # general purpose state machine
 
- A lean general purpose state machine plugin for Godot.
+A general purpose state machine which can express states and transitions between them. Feature are
+
+  - Comes in a single file (addons/gpsm/code/gpsm_main.gd).
+  - Does not clutter the name space, only adds GPSM as class.
+  - Is not based on Nodes, but on a RefCounted script.
+  - Provides 4 signals for each state and 2 signals for each transition.
+  - Entirely based on Godot's signals.
+  - Well documented.
+  - Comes with gdunit4 tests.
+  - Comes with example project.
+  - Tests can be deleted (addons/gpsm/tests).
+  - Examples can be deleted (addons/gpsm/examples).
+
+Can be used as basis for more complex state machines or can be used as a fully functional state machine.
+See code repository's README file for instructions or example sub-folder for a demo.
+
 
   - AssetLib: [Godot GPSM (#23837)](https://godotengine.org/asset-library/asset/23837)
     - 1st proposal at [Godot GPSM (#23828)](https://godotengine.org/asset-library/asset/edit/23828)
     - 2nd proposal at [Godot GPSM (#23837)](https://godotengine.org/asset-library/asset/edit/23837)
   - Github: [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm)
     - asset download url on [github.com/kraasch/godot-gpsm]( https://github.com/kraasch/godot-gpsm/archive/f142dc4597c40defa1680f4d280724d86576acb1.zip)
+
 
 ## demo
 
