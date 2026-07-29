@@ -39,6 +39,70 @@ func _setup_testing_state_machine() -> void:
 # TestSuite generated from
 const __source: String = 'res://addons/gpsm/code/main.gd'
 
+## TODO: add comments to everything.
+
+#func test_state_machine__provide_signal_during_transition() -> void:
+	#pass
+
+#func test_state_machine__print_methods() -> void:
+	#pass
+
+func test_state_machine__allow_alternate_names() -> void:
+	# create machines.
+	var result: Array[String] = []
+	var unused_reference: GPSM = GPSM.new_machine('machine 1')
+	GPSM.new_machine('unused machine 2')
+	var sm: GPSM = GPSM.get_machine('machine 1')
+	await assert_error(func(): GPSM.new_machine('machine 1')).is_push_warning('machine name already exists')
+	assert_that(sm).is_equal(unused_reference)
+	assert_int(len(GPSM.machines)).is_equal(2)
+	# create states.
+	var A: GPSM.State = sm.new_state('start')
+	var B: GPSM.State = sm.new_state('something else')
+	assert_that(sm.new_state('something else')).is_null()
+	await assert_error(func(): sm.new_state('something else')).is_push_warning('state name already exists')
+	assert_int(len(sm.states)).is_equal(2)
+	A.on_before_exited.connect(result.append.bind('a'))
+	A.on_exited.connect(result.append.bind('b'))
+	A.on_entered.connect(result.append.bind('c'))
+	A.on_after_entered.connect(result.append.bind('d'))
+	B.on_before_exited.connect(result.append.bind('A'))
+	B.on_exited.connect(result.append.bind('B'))
+	B.on_entered.connect(result.append.bind('C'))
+	B.on_after_entered.connect(result.append.bind('D'))
+	# create transitions.
+	var T0: GPSM.Transition = sm.new_transition(A, A, 'loop in start')
+	var T1: GPSM.Transition = sm.new_transition(A, A, 'loop in start 2')
+	var T2: GPSM.Transition = sm.new_transition(A, B, 'move on')
+	var T3: GPSM.Transition = sm.new_transition(B, B, 'loop in second')
+	assert_that(sm.new_transition(A, B, 'loop in second')).is_null()
+	await assert_error(func(): sm.new_transition(A, B, 'loop in second')).is_push_warning('transition name already exists')
+	assert_int(len(sm.transitions)).is_equal(4)
+	# test.
+	sm.initialize()
+	sm.trigger('loop in start') # triggers T0 and T1.
+	sm.trigger('loop in start 2') # triggers 
+	sm.trigger('move on') # triggers T2.
+	sm.trigger_by_index(3) # triggers once.
+	await assert_error(func(): sm.trigger('MOVE ON')).is_push_warning('transition name not found')
+	await assert_error(func(): sm.trigger_by_index(-1)).is_push_warning('transition index out of bounds')
+	await assert_error(func(): sm.trigger_by_index(4)).is_push_warning('transition index out of bounds')
+	assert_that(sm.get_transition('loop in start')).is_equal(T0)
+	assert_that(sm.get_transition('loop in start 2')).is_equal(T1)
+	assert_that(sm.get_transition('move on')).is_equal(T2)
+	assert_that(sm.get_transition('loop in second')).is_equal(T3)
+	assert_that(sm.get_transition('DOES NOT EXIST')).is_null()
+	await assert_error(func(): sm.get_transition('DOES NOT EXIST')).is_push_warning('transition name not found')
+	assert_array(result).is_equal(
+		[
+			'c', # on initialization there is no states to exit and no after_entered, because all three depend on the exit of a state.
+			'a','b','c','d', # state A to state A.
+			'a','b','c','d', # state A to state A.
+			'A','b','C','d', # state A to state B.
+			'A','B','C','D', # state B tot state B.
+		]
+	)
+
 func test_state_machine__allow_transitions_to_same_state() -> void:
 	var result: Array[String] = []
 	var sm: GPSM = GPSM.new()
@@ -171,7 +235,7 @@ func test_state_machine__enable_transition_warnings__no_warnings() -> void:
 	_SM.throw_type = GPSM.THROW_TYPE.SILENT
 	assert_that(_SM.current_state).is_equal(_A)
 	await assert_error(func (): _T0.trigger()).is_success()
-	await assert_error(func (): _T1.trigger()).is_success()
+	await assert_error(func (): _T3.trigger()).is_success()
 	assert_that(_SM.current_state).is_equal(_B)
 	await assert_error(func (): _T1.trigger()).is_success()
 	await assert_error(func (): _T3.trigger()).is_success()
