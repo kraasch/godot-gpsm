@@ -14,6 +14,7 @@ A general purpose state machine which can express states and transitions between
   - Comes with example project.
   - Tests can be deleted (addons/gpsm/tests).
   - Examples can be deleted (addons/gpsm/examples).
+  - Assets can be deleted (addons/gpsm/assets).
 
 Can be used as basis for more complex state machines or can be used as a fully functional state machine.
 See code repository's README file for instructions or example sub-folder for a demo.
