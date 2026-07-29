@@ -17,13 +17,12 @@ A general purpose state machine which can express states and transitions between
 Can be used as basis for more complex state machines or can be used as a fully functional state machine.
 See code repository's README file for instructions or example sub-folder for a demo.
 
-
   - AssetLib: [Godot GPSM (#23837)](https://godotengine.org/asset-library/asset/23837)
     - 1st proposal at [Godot GPSM (#23828)](https://godotengine.org/asset-library/asset/edit/23828)
     - 2nd proposal at [Godot GPSM (#23837)](https://godotengine.org/asset-library/asset/edit/23837)
   - Github: [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm)
-    - asset download url on [github.com/kraasch/godot-gpsm]( https://github.com/kraasch/godot-gpsm/archive/f142dc4597c40defa1680f4d280724d86576acb1.zip)
-
+    - asset download url for v1.0.1 on [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm/archive/f142dc4597c40defa1680f4d280724d86576acb1.zip)
+    - asset download url for v1.2.0 on [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm/archive/18f5cdc8745cf89f372df1c324f3b2aa9790771a.zip)
 
 ## demo
 
