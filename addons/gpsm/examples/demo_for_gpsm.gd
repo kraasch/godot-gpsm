@@ -72,3 +72,10 @@ func _setup_testing_state_machine() -> void:
 		transition.on_failure.connect(collect_failures)
 	_SM.throw_type = GPSM.THROW_TYPE.SILENT
 	_SM.initialize()
+
+## Quits the game when Esc is pressed, but only when running from the editor.
+func _unhandled_input(event):
+	# NOTE: useful for debugging, this leaves the game when hitting the ESC key.
+	if event.is_action_pressed("ui_cancel"):
+		if OS.has_feature("editor"):
+			get_tree().quit()
