@@ -32,6 +32,7 @@ See code repository's README file for instructions or example sub-folder for a d
 
 <p align="center">
   <img src="./addons/gpsm/info/picture_dark.png" />
+  <img src="./addons/gpsm/info/picture_demo.png" />
 </p>
 
 ## code example
