@@ -1,7 +1,7 @@
 
 # general purpose state machine
 
-A general purpose state machine which can express states and transitions between them. Feature are...
+A general purpose state machine which can express states and transitions between them. Features are...
 
   - Comes in a single file (addons/gpsm/code/gpsm_main.gd).
   - Does not clutter the name space, only adds GPSM as class.
