@@ -3,18 +3,18 @@
 
 A general purpose state machine which can express states and transitions between them. Features are...
 
-  - Comes in a single file (addons/gpsm/code/gpsm_main.gd).
-  - Does not clutter the name space, only adds GPSM as class.
-  - Is not based on Nodes, but on a RefCounted script.
-  - Provides 4 signals for each state and 2 signals for each transition.
-  - Entirely based on Godot's signals.
-  - Well documented (50% of code = amount of comments).
-  - Good test coverage (200% of code = amount of tests).
-  - Comes with gdunit4 tests.
-  - Comes with example project.
-  - Tests can be deleted (addons/gpsm/tests).
-  - Examples can be deleted (addons/gpsm/examples).
-  - Assets can be deleted (addons/gpsm/assets).
+  - comes in a single file (addons/gpsm/code/gpsm_main.gd),
+  - does not clutter the name space, only adds GPSM as class,
+  - is not based on Nodes, but on a RefCounted script,
+  - provides 4 signals for each state and 2 signals for each transition,
+  - entirely based on Godot's signals,
+  - well documented (50% of code = amount of comments),
+  - good test coverage (200% of code = amount of tests),
+  - comes with gdunit4 tests,
+  - comes with example project,
+  - tests can be deleted (addons/gpsm/tests),
+  - examples can be deleted (addons/gpsm/examples),
+  - assets can be deleted (addons/gpsm/assets).
 
 Can be used as basis for more complex state machines or can be used as a fully functional state machine.
 See code repository's README file for instructions or example sub-folder for a demo.
