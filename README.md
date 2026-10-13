@@ -28,6 +28,16 @@ See code repository's README file for instructions or example sub-folder for a d
     - asset download url for v1.2.0 on [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm/archive/18f5cdc8745cf89f372df1c324f3b2aa9790771a.zip).
     - asset download url for v1.2.1 on [github.com/kraasch/godot-gpsm](https://github.com/kraasch/godot-gpsm/archive/98d184c222b7f13bcfb638b415cbfb7602944ed5.zip)
 
+## next
+
+  - [ ] hooks for `_process()`, `_physics_process()` and `_xxxx()`.
+    - have global autoload with listener pattern, global calls each subscribed node's function.
+  - [ ] implement parents to enable state charts (parents are references to full machines).
+    - https://statecharts.dev/
+    - https://statecharts.dev/state-machine-state-explosion.html
+    - https://statecharts.online/
+    - https://github.com/derkork/godot-statecharts
+
 ## demo
 
 <p align="center">
